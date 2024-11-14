@@ -1,0 +1,13 @@
+compatibility_date = "2024-01-01"
+
+name = "supersecret"
+main = "src/worker.js"
+
+[vars]
+# This is the key that will be used to encrypt and decrypt the secrets
+# use wrangler secret put MASTER_KEY to set this value
+# MASTER_KEY = "32 BYTES OF RANDOM DATA HERE"
+
+[[kv_namespaces]]
+binding = "SUPER_SECRETS"
+id = "40148cebec3d47928429ac81393006ee"
