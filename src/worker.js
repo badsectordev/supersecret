@@ -62,10 +62,10 @@ async function decrypt(encryptedData, iv, dynamicKey, env) {
 }
 
 async function generateSecretPage() {
-  return await fetch('templates/view-secret.html').then(res => res.text());
+  return await fetch('/view-secret.html').then(res => res.text());
 }
 
-const createPage = await fetch('templates/create-secret.html').then(res => res.text());
+const createPage = await fetch('/create-secret.html').then(res => res.text());
 
 export default {
   async fetch(request, env) {
