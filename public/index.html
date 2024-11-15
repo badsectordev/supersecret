@@ -34,7 +34,9 @@
           });
           if (!response.ok) throw new Error('Failed to create secret');
           const url = await response.text();
-          document.getElementById('result').textContent = url;
+          const resultElement = document.getElementById('result');
+          resultElement.textContent = url;
+          resultElement.classList.remove('hidden');
         } catch (error) {
           document.getElementById('result').textContent = 'Error: ' + error.message;
         } finally {
