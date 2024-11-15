@@ -100,9 +100,6 @@ export default {
     if (url.pathname.startsWith("/secret/")) {
       const id = url.pathname.split("/").pop();
 
-      if (request.method === "GET") {
-        return Response.redirect(`${url.origin}/view-secret.html${url.hash}`, 302);
-      }
 
       if (request.method === "POST") {
         try {
