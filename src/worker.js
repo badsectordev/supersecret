@@ -65,20 +65,11 @@ async function generateSecretPage() {
   return await fetch('/view-secret.html').then(res => res.text());
 }
 
-const createPage = await fetch('/create-secret.html').then(res => res.text());
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/") {
-      if (request.method === "GET") {
-        return new Response(createPage, {
-          headers: { "Content-Type": "text/html" },
-        });
-      }
-
-      if (request.method === "POST") {
+    if (url.pathname === "/" && request.method === "POST") {
         try {
           const secret = await request.text();
           if (!secret.trim()) {
