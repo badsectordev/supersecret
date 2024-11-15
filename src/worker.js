@@ -89,7 +89,7 @@ export default {
           },
         );
 
-        return new Response(`${url.origin}/secret/${id}#${dynamicKey}`);
+        return new Response(`${url.origin}/view-secret.html#${dynamicKey}`);
       } catch (error) {
         return new Response("Failed to create secret: " + error.message, {
           status: 500,
