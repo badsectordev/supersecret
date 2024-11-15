@@ -69,7 +69,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/" && request.method === "POST") {
+    if (url.pathname === "/create" && request.method === "POST") {
       try {
         const secret = await request.text();
         if (!secret.trim()) {
