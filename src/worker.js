@@ -70,7 +70,7 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/" && request.method === "POST") {
-        try {
+      try {
           const secret = await request.text();
           if (!secret.trim()) {
             return new Response("Secret cannot be empty", { status: 400 });
@@ -138,5 +138,5 @@ export default {
     }
 
     return new Response("Not found", { status: 404 });
-  },
+  }
 };
