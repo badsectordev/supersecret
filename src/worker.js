@@ -71,10 +71,10 @@ export default {
 
     if (url.pathname === "/" && request.method === "POST") {
       try {
-          const secret = await request.text();
-          if (!secret.trim()) {
-            return new Response("Secret cannot be empty", { status: 400 });
-          }
+        const secret = await request.text();
+        if (!secret.trim()) {
+          return new Response("Secret cannot be empty", { status: 400 });
+        }
 
           const id = crypto.randomUUID();
           const { encrypted, iv, dynamicKey } = await encrypt(secret, env);
