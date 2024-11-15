@@ -71,6 +71,16 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname.startsWith("/static/")) {
+      const filename = url.pathname.split("/").pop();
+      if (filename === "styles.css") {
+        return new Response(await fetch('templates/styles.css').then(res => res.text()), {
+          headers: { "Content-Type": "text/css" },
+        });
+      }
+      return new Response("Not found", { status: 404 });
+    }
+
     if (url.pathname === "/") {
       if (request.method === "GET") {
         return new Response(createPage, {
