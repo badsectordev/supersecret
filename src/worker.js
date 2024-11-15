@@ -62,7 +62,7 @@ async function decrypt(encryptedData, iv, dynamicKey, env) {
 }
 
 async function generateSecretPage() {
-  return await fetch('/view-secret.html').then(res => res.text());
+  return await fetch("/view-secret.html").then((res) => res.text());
 }
 
 export default {
@@ -76,27 +76,27 @@ export default {
           return new Response("Secret cannot be empty", { status: 400 });
         }
 
-          const id = crypto.randomUUID();
-          const { encrypted, iv, dynamicKey } = await encrypt(secret, env);
+        const id = crypto.randomUUID();
 
-          await env.SUPER_SECRETS.put(
-            id,
-            JSON.stringify({
-              encrypted,
-              iv,
-              createdAt: Date.now(),
-            }),
-            {
-              expirationTtl: 86400,
-            },
-          );
+        const { encrypted, iv, dynamicKey } = await encrypt(secret, env);
 
-          return new Response(`${url.origin}/secret/${id}#${dynamicKey}`);
-        } catch (error) {
-          return new Response("Failed to create secret: " + error.message, {
-            status: 500,
-          });
-        }
+        await env.SUPER_SECRETS.put(
+          id,
+          JSON.stringify({
+            encrypted,
+            iv,
+            createdAt: Date.now(),
+          }),
+          {
+            expirationTtl: 86400,
+          },
+        );
+
+        return new Response(`${url.origin}/secret/${id}#${dynamicKey}`);
+      } catch (error) {
+        return new Response("Failed to create secret: " + error.message, {
+          status: 500,
+        });
       }
     }
 
@@ -138,5 +138,5 @@ export default {
     }
 
     return new Response("Not found", { status: 404 });
-  }
+  },
 };
