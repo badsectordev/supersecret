@@ -61,7 +61,6 @@ async function decrypt(encryptedData, iv, dynamicKey, env) {
   return new TextDecoder().decode(decrypted);
 }
 
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -89,7 +88,9 @@ export default {
           },
         );
 
-        return new Response(`${url.origin}/view-secret.html?id=${id}#${dynamicKey}`);
+        return new Response(
+          `${url.origin}/view-secret.html?id=${id}#${dynamicKey}`,
+        );
       } catch (error) {
         return new Response("Failed to create secret: " + error.message, {
           status: 500,
@@ -99,7 +100,6 @@ export default {
 
     if (url.pathname.startsWith("/secret/")) {
       const id = url.pathname.split("/").pop();
-
 
       if (request.method === "POST") {
         try {
