@@ -61,9 +61,6 @@ async function decrypt(encryptedData, iv, dynamicKey, env) {
   return new TextDecoder().decode(decrypted);
 }
 
-async function generateSecretPage() {
-  return await fetch("/view-secret.html").then((res) => res.text());
-}
 
 export default {
   async fetch(request, env) {
@@ -104,9 +101,7 @@ export default {
       const id = url.pathname.split("/").pop();
 
       if (request.method === "GET") {
-        return new Response(await generateSecretPage(), {
-          headers: { "Content-Type": "text/html" },
-        });
+        return Response.redirect(`${url.origin}/view-secret.html${url.hash}`, 302);
       }
 
       if (request.method === "POST") {
